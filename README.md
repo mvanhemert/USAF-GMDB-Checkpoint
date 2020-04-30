@@ -1,7 +1,8 @@
 # GMDB USAF Checkpoint
 
 ## Objectives
-    - Test Drive a REST API that uses Express and connects to a database (not an in-memory data store)
+    - Create a REST API that uses Express and connects to a database (not an in-memory data store)
+    - Test your application using Jest and Supertest 
 
 ## Background
 As of right now, you have been given a basic setup of an application using Express. In the `app.js` file, you will write the code to generate the REST API that connects to your database. 
