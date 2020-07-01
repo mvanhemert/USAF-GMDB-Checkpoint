@@ -22,6 +22,7 @@ describe('GET /movies?search = <query>', () => {
       it('GETs data from movies with a query', async done => {
           const res = await request.get('/movies?search=Trek')          
           expect(res.body.length).toBeGreaterThan(0)
+          expect(res.body.length).toBeLessThan(500)
           done()
       })
 })

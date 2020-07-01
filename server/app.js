@@ -24,10 +24,19 @@ app.get('/',(req,res) => {
 });
 
 app.get('/movies', (req, res) => {
-   pool.query('SELECT * FROM movies ORDER BY movie_id ASC', (error, results) => {
-      if (error) throw error
-      res.status(200).json(results.rows)
+   const movie_query = req.query.search
+   console.log(movie_query)
+   if(movie_query) {
+      pool.query('SELECT * FROM movies WHERE title LIKE $1', ['%' + movie_query + '%'], (error, results) => {
+         if (error) throw error
+         res.status(200).json(results.rows)
+       })  
+   } else {
+      pool.query('SELECT * FROM movies ORDER BY movie_id ASC', (error, results) => {
+         if (error) throw error
+         res.status(200).json(results.rows)
     })  
+   }
 })
 
 app.get('/movies/:id', (req, res) => {
@@ -36,6 +45,7 @@ app.get('/movies/:id', (req, res) => {
    pool.query('SELECT * FROM movies WHERE movie_id = $1',[movie_id], (error, results) => {
       if (error) throw error
       res.status(200).json(results.rows)
+      
     })  
 })
 
