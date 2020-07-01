@@ -34,3 +34,21 @@ describe('GET /reviews/:movieId', () => {
       done()
   })
 })
+
+ 
+
+  test('can add a new review to db', done => {
+    let newReview =
+    {
+      movie_id: 3,
+      review_text: "great movie"
+    }
+    supertest(app).post('/reviews').send(newReview).set('Accept', 'application/json')
+    .expect(201).end(function(error,res){
+      if(error) {
+        throw error
+      }
+      done()
+    })
+    
+  })

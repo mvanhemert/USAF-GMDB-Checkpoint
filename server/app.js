@@ -55,6 +55,17 @@ app.get('/reviews/:movieId', (req, res) => {
     })  
 })
 
+app.post('/reviews', (req, res) => {
+   const review = req.body
+   const movie_id = review.movie_id
+   const review_text = review.review_text
+   console.log(JSON.stringify(review))
+   pool.query('INSERT INTO reviews (movie_id, review_text) VALUES($1, $2)', [movie_id, review_text], (error, results) => {
+      if (error) throw error
+      res.status(201).send()
+   })
+})
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
 module.exports = app
