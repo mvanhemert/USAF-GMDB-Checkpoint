@@ -62,8 +62,10 @@ describe('GET /reviews/:movieId', () => {
     let temp = Date.now().toString();
     let newUser =
     {
-      last_name: "great movie",
-      email: temp
+      email: temp,
+      first_name: "Sam",
+      last_name: "Brown",
+      password: "98(*gyR"
     }
     supertest(app).post('/register').send(newUser).set('Accept', 'application/json')
     .expect(201).end(function(error,res){
