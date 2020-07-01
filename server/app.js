@@ -30,6 +30,15 @@ app.get('/movies', (req, res) => {
     })  
 })
 
+app.get('/movies/:id', (req, res) => {
+   const movie_id = req.params.id
+   //console.log("movie id: ", movie_id)
+   pool.query('SELECT * FROM movies WHERE movie_id = $1',[movie_id], (error, results) => {
+      if (error) throw error
+      res.status(200).json(results.rows)
+    })  
+})
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
 module.exports = app
