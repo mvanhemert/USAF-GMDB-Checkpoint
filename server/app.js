@@ -66,6 +66,17 @@ app.post('/reviews', (req, res) => {
    })
 })
 
+app.post('/register', (req, res) => {
+   const user = req.body
+   const last_name = user.last_name
+   const email = user.email
+   console.log(JSON.stringify(user))
+   pool.query('INSERT INTO users (last_name,email) VALUES($1, $2)', [last_name,email], (error, results) => {
+      if (error) throw error
+      res.status(201).send()
+   })
+})
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
 module.exports = app

@@ -52,3 +52,20 @@ describe('GET /reviews/:movieId', () => {
     })
     
   })
+
+  test('can create a new user', done => {
+    let temp = Date.now().toString();
+    let newUser =
+    {
+      last_name: "great movie",
+      email: temp
+    }
+    supertest(app).post('/register').send(newUser).set('Accept', 'application/json')
+    .expect(201).end(function(error,res){
+      if(error) {
+        throw error
+      }
+      done()
+    })
+    
+  })
