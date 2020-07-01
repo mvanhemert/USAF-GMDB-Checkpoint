@@ -26,3 +26,11 @@ describe('GET /movies?search = <query>', () => {
           done()
       })
 })
+
+describe('GET /reviews/:movieId', () => {
+  it('GETs reviews from movie database by a movieid', async done => {
+      const res = await request.get('/reviews/3')          
+      expect(res.body.length).toBeGreaterThan(0)
+      done()
+  })
+})

@@ -25,7 +25,6 @@ app.get('/',(req,res) => {
 
 app.get('/movies', (req, res) => {
    const movie_query = req.query.search
-   console.log(movie_query)
    if(movie_query) {
       pool.query('SELECT * FROM movies WHERE title LIKE $1', ['%' + movie_query + '%'], (error, results) => {
          if (error) throw error
@@ -41,11 +40,18 @@ app.get('/movies', (req, res) => {
 
 app.get('/movies/:id', (req, res) => {
    const movie_id = req.params.id
-   //console.log("movie id: ", movie_id)
    pool.query('SELECT * FROM movies WHERE movie_id = $1',[movie_id], (error, results) => {
       if (error) throw error
       res.status(200).json(results.rows)
       
+    })  
+})
+
+app.get('/reviews/:movieId', (req, res) => {
+   const movie_id = req.params.movieId
+   pool.query('SELECT * FROM reviews WHERE movie_id = $1',[movie_id], (error, results) => {
+      if (error) throw error
+      res.status(200).json(results.rows)     
     })  
 })
 
