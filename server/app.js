@@ -60,7 +60,8 @@ app.post('/reviews', (req, res) => {
    const movie_id = review.movie_id
    const review_text = review.review_text
    console.log(JSON.stringify(review))
-   pool.query('INSERT INTO reviews (movie_id, review_text) VALUES($1, $2)', [movie_id, review_text], (error, results) => {
+   pool.query('INSERT INTO reviews (last_updated, movie_id, review_text, review_title, reviewer_id, stars, imdbid) VALUES($1, $2, $3, $4, $5,$6, $7)', 
+      [review.last_updated, movie_id, review_text, review.review_title, review.reviewer_id, review.stars, review.imdbid], (error, results) => {
       if (error) throw error
       res.status(201).send()
    })

@@ -40,8 +40,13 @@ describe('GET /reviews/:movieId', () => {
   test('can add a new review to db', done => {
     let newReview =
     {
+      last_updated: "2-14-2020",
       movie_id: 3,
-      review_text: "great movie"
+      review_text: "great movie",
+      review_title: "Gone with the Wind",
+      reviewer_id: 33,
+      stars: 4,
+      imdbid: "3452"
     }
     supertest(app).post('/reviews').send(newReview).set('Accept', 'application/json')
     .expect(201).end(function(error,res){
